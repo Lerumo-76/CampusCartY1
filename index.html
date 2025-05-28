@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CampusCart - Student Electronics Deals</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <!--Font Awesome CND for icons-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+  /* Container */
+    .container {
+      max-width: 100%;
+      margin: 40px auto 80px;
+      padding: 0 20px;
+      flex-grow: 1;
+    }
+
+    /* Carousel Styles */
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 15px;
+      max-width: 100%;
+      margin-bottom: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      background: white;
+    }
+
+    .carousel-inner {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      will-change: transform;
+    }
+
+    .carousel-item {
+      min-width: 100%;
+      user-select: none;
+      position: relative;
+    }
+
+    .carousel-item img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+
+    /* Carousel Buttons */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(40, 44, 52, 0.7);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      padding: 10px 14px;
+      border-radius: 50%;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease;
+      z-index: 10;
+    }
+
+    .carousel-btn:hover {
+      background-color: rgba(40, 44, 52, 0.9);
+    }
+
+    .carousel-btn.prev {
+      left: 15px;
+    }
+
+    .carousel-btn.next {
+      right: 15px;
+    }
+
+    /* Shop Button */
+    .btn-shop {
+      display: inline-block;
+      background-color: #007bff;
+      color: white;
+      font-weight: 600;
+      font-size: 1.2rem;
+      padding: 15px 40px;
+      border-radius: 30px;
+      box-shadow: 0 6px 12px rgba(0, 123, 255, 0.6);
+      cursor: pointer;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      border: none;
+      margin: 0 auto;
+      display: block;
+      width: max-content;
+      user-select: none;
+    }
+
+    .btn-shop:hover {
+      background-color: #0056b3;
+      box-shadow: 0 8px 20px rgba(0, 86, 179, 0.8);
+    }
+    @media(max-width: 600px) {
+      .carousel-item img {
+        height: 250px;
+      }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <h1>CampusCart</h1>
+  <nav class="side-nav">
+     <a href="search.html">
+      <i class="fas fa-search"></i>
+      <span class="nav-label"></span>
+    </a>
+    <a class="active" href="index.html">
+      <i class="fas fa-home"></i>
+      <span class="nav-label">Home</span>
+    </a>
+    <a href="shop.html">
+      <i class="fas fa-store"></i>
+      <span class="nav-label">Shop</span>
+    </a>
+    <a href="deals.html">
+      <i class="fas fa-tag"></i>
+      <span class="nav-label">Deals</span></a>
+    <a href="about.html">
+      <i class="fas fa-user"></i>
+      <span class="nav-label">About Us</span>
+    </a>
+    <a href="contact.html">
+      <i class="fas fa-envelope"></i>
+      <span class="nav-label">Contact</span>
+    </a>
+    <a href="feedback.html">
+      <i class="fas fa-pen"></i>
+      <span class="nav-label">Feedback Form</span>
+    </a>
+  </nav>
+</header>
+<main class="container">
+  <section class="hero">
+  <h2 class="home-heading">Welcome Students! Get the Best Deals on Laptops, Phones & More</h2>
+  <div class="carousel">
+      <button class="carousel-btn prev">&#10094;</button>
+      <div class="carousel-inner">
+        <div class="carousel-item">
+          <img src="images/Background/dell-Gi3iUJ1FwxI-unsplash.jpg" alt="Background/dell-Gi3iUJ1FwxI-unsplash.jpg" />
+        </div>
+        <div class="carousel-item">
+          <img src="images/Background/andrey-matveev-ZTkX2dfUubI-unsplash.jpg" alt="andrey-matveev-ZTkX2dfUubI-unsplash.jpg" />
+        </div>
+        <div class="carousel-item">
+          <img src="images/Background/rahul-chakraborty-xsGxhtAsfSA-unsplash.jpg" alt="rahul-chakraborty-xsGxhtAsfSA-unsplash.jpg" />
+        </div>
+      </div>
+      <button class="carousel-btn next">&#10095;</button>
+    </section>
+  <a href="shop.html" class="btn-shop">Shop Now</a>
+</main>
+<footer>
+  <p>&copy; 2025 CampusCart. All rights reserved.</p>
+</footer>
+
+<script>
+    (function(){
+      const carouselInner = document.querySelector('.carousel-inner');
+      const carouselItems = document.querySelectorAll('.carousel-item');
+      const prevBtn = document.querySelector('.carousel-btn.prev');
+      const nextBtn = document.querySelector('.carousel-btn.next');
+      const totalItems = carouselItems.length;
+      let currentIndex = 0;
+
+      function updateCarousel() {
+        const offset = -currentIndex * 100;
+        carouselInner.style.transform = `translateX(${offset}%)`;
+        }
+        function showNext() {
+        currentIndex = (currentIndex + 1) % totalItems;
+        updateCarousel();
+        }
+        function showPrev() {
+        currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+        updateCarousel();
+    }
+    nextBtn.addEventListener('click', () => {
+      showNext();
+      resetAutoplay();
+    });
+    prevBtn.addEventListener('click', () => {
+      showPrev();
+      resetAutoplay();
+    });
+    let autoplayInterval = setInterval(showNext, 4000);
+    function resetAutoplay() {
+      clearInterval(autoplayInterval);
+      autoplayInterval = setInterval(showNext, 4000);
+    }
+    })();
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!-- product.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Product Details</title>
+  <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+  <header><h1>CampusCart</h1></header>
+  <main id="product-detail" style="padding: 2rem;"></main>
+  <footer><p>&copy; 2025 CampusCart</p></footer>
+
+  <script>
+    const products = {
+      "product-7": {
+        title: "HP Pavilion 15.6\" HD Touchscreen",
+        image: "images/7.webp",
+        price: "P9200",
+        description: "HP Pavilion 15.6\" HD Touchscreen Anti-Glare Laptop, 16GB RAM, 1TB SSD Storage...",
+      },
+      "product-1": {
+        title: "Lenovo IdeaPad Slim 3X - 2025",
+        image: "images/1.webp",
+        price: "P7899",
+        description: "Lenovo IdeaPad Slim 3X - 2025 - AI Laptop with Copilot+...",
+      },
+      // Add more products here
+    };
+
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("id");
+
+    const product = products[productId];
+    const container = document.getElementById("product-detail");
+
+    if (product) {
+      container.innerHTML = `
+        <div class="product-card">
+          <img src="${product.image}" alt="${product.title}">
+          <h2>${product.title}</h2>
+          <p>${product.description}</p>
+          <p><strong>${product.price}</strong></p>
+          <button onclick="addToCart('${productId}')" class="btn">Add to Cart</button>
+        </div>
+      `;
+    } else {
+      container.innerHTML = "<p>Product not found.</p>";
+    }
+
+    function addToCart(id) {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.push(products[id]);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert("Added to cart!");
+    }
+  </script>
+</body>
+</html>

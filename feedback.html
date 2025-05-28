@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feedback Form- CampusCart</title>
+    <link rel="stylesheet" href="styles.css"/>
+    <!--Font Awesome CND for icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    .container {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      width: 400px;
+      padding: 30px 40px;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #4b3f72;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #5e4b8b;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.3s ease;
+      resize: vertical;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #667eea;
+      box-shadow: 0 0 8px #667eea88;
+    }
+
+    textarea {
+      min-height: 80px;
+    }
+
+    button {
+      background: #667eea;
+      color: white;
+      font-weight: 600;
+      padding: 14px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      letter-spacing: 1px;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background: #5562d4;
+    }
+
+    .thank-you {
+      text-align: center;
+      font-size: 18px;
+      color: #4b3f72;
+      margin-top: 20px;
+      display: none;
+    }
+    .main {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.form-container {
+  max-width: 600px;
+  width: 100%;
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 15px;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #452c63; /* similar to the dark purple in your screenshot */
+}
+
+input,
+select,
+textarea {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+button[type="submit"] {
+  margin-top: 20px;
+  padding: 12px;
+  background-color: #6679f8; /* matches your blue button */
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+  </style>
+</head>
+<body>
+     <header>
+        <h1>CampusCart</h1>
+    </header>
+    <nav class="side-nav">
+         <a href="search.html">
+      <i class="fas fa-search"></i>
+      <span class="nav-label"></span>
+    </a>
+        <a href="index.html">
+            <i class="fas fa-home"></i>
+            <span class="nav-label">Home</span>
+        </a>
+        <a href="shop.html">
+            <i class="fas fa-store"></i>
+            <span class="nav-label">Shop</span>
+        </a>
+        <a href="deals.html">
+            <i class="fas fa-tag"></i>
+            <span class="nav-label">Deals</span>
+        </a>
+        <a href="about.html">
+            <i class="fas fa-user"></i>
+            <span class="nav-label">About Us</span>
+        </a>
+        <a href="contact.html">
+            <i class="fas fa-envelope"></i>
+            <span class="nav-label">Contact</span>
+        </a>
+       <a class="active" href="feedback.html">
+            <i class="fas fa-pen"></i>
+            <span class="nav-label">Feedback Form</span>
+            </a>
+    </nav>
+    <main class="main">
+    <h2>Feedback Form</h2>
+    <form id="feedbackForm" novalidate>
+      <label for="name">Name *</label>
+      <input type="text" id="name" name="name" placeholder="Your name" required minlength="2" />
+
+      <label for="email">Email *</label>
+      <input type="email" id="email" name="email" placeholder="Your email" required />
+
+      <label for="rating">Rating *</label>
+      <select id="rating" name="rating" required>
+        <option value="" disabled selected>Select a rating</option>
+        <option value="1">1 - Very poor</option>
+        <option value="2">2 - Poor</option>
+        <option value="3">3 - Average</option>
+        <option value="4">4 - Good</option>
+        <option value="5">5 - Excellent</option>
+      </select>
+
+      <label for="comments">Comments</label>
+      <textarea id="comments" name="comments" placeholder="Your feedback" rows="4"></textarea>
+
+      <button type="submit">Submit Feedback</button>
+    </form>
+    <div class="thank-you" id="thankYouMessage">
+      Thank you for your feedback! 🙏
+  </div>
+</main>
+  <script>
+    const form = document.getElementById('feedbackForm');
+    const thankYouMessage = document.getElementById('thankYouMessage');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+
+      // Simulate form submission
+      form.style.display = 'none';
+      thankYouMessage.style.display = 'block';
+
+      // Optionally, here you could add code to send data to server via fetch/AJAX
+
+      // Reset form after a while for user convenience
+      setTimeout(() => {
+        form.reset();
+        form.style.display = 'flex';
+        thankYouMessage.style.display = 'none';
+      }, 5000);
+    });
+  </script>
+</body>
+</html>
+
