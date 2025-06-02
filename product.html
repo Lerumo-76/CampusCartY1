@@ -196,10 +196,16 @@
 
   // Main execution
   window.addEventListener('DOMContentLoaded', () => {
-    const productId = getQueryParam('id');
-    const product = products.find(p => p.id === productId);
-    displayProduct(product);
-  });
+  const productId = getQueryParam('id');
+  
+  if (!productId) {
+    document.getElementById('product-container').innerHTML = "<p>No product selected.</p>";
+    return;
+  }
+
+  const product = products.find(p => p.id === productId);
+  displayProduct(product);
+});
   // Function to display product details
 function displayProduct(product) {
   if (!product) {
