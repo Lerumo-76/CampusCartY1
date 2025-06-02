@@ -9,52 +9,152 @@
 </head>
 <body>
   <header><h1>CampusCart</h1></header>
-  <main id="product-detail" style="padding: 2rem;"></main>
+  <main id="product-detail" style="padding: 2rem;">
+    <div id="product-container"></div>
+  </main>
   <footer><p>&copy; 2025 CampusCart</p></footer>
 
-  <script>
-    const products = {
-      "product-7": {
-        title: "HP Pavilion 15.6\" HD Touchscreen",
-        image: "images/7.webp",
-        price: "P9200",
-        description: "HP Pavilion 15.6\" HD Touchscreen Anti-Glare Laptop, 16GB RAM, 1TB SSD Storage...",
-      },
-      "product-1": {
-        title: "Lenovo IdeaPad Slim 3X - 2025",
-        image: "images/1.webp",
-        price: "P7899",
-        description: "Lenovo IdeaPad Slim 3X - 2025 - AI Laptop with Copilot+...",
-      },
-      // Add more products here
-    };
+<script>
+  // Product data array based on your HTML
+  const products = [
+    {
+      id: "1",
+      img: "images/1.webp",
+      title: "Lenovo IdeaPad Slim 3X - 2025",
+      description: "Lenovo IdeaPad Slim 3X - 2025 - Everyday AI Laptop - Copilot+ PC - 15.3\" WUXGA Display - 16 GB Memory - 512 GB Storage - Qualcomm® Snapdragon® X - Luna Grey",
+      price: "P7899",
+      discountText: "Student Discount Available"
+    },
+    {
+      id: "10",
+      img: "images/10.webp",
+      title: "Dell Inspiron 3520 15.6\"",
+      description: "Dell Inspiron 3520 15.6\" FHD Laptop, Intel Core i7-1255U Processor, 32GB RAM, 1TB SSD, Webcam, HDMI, SD-Card Slot, Wi-Fi 6, Windows 11 Home, Black",
+      price: "P15600",
+      discountText: "Student Discount Available"
+    },
+    {
+      id: "7",
+      img: "images/7.webp",
+      title: "HP Pavilion 15.6\" HD Touchscreen Anti-Glare Laptop",
+      description: "HP Pavilion 15.6\" HD Touchscreen Anti-Glare Laptop, 16GB RAM, 1TB SSD Storage, Intel Core Processor up to 4.1GHz, Up to 11 Hours Long Battery Life, Type-C, HDMI, Windows 11 Home, Silver",
+      price: "P9200",
+      discountText: "Student Discount Available"
+    },
+    {
+      id: "11",
+      img: "images/11.jpg",
+      title: "Dell Inspiron 3535 Laptop - 15.6-inch",
+      description: "Dell Inspiron 3535 Laptop - 15.6-inch FHD (1920 x 1080) Display, AMD Ryzen 5 7520U Processor, 8GB DDR4 RAM, 512GB SSD, AMD Radeon Graphics, Windows 11 Home, 6-Months Migrate - Carbon Black",
+      price: "P10500",
+      discountText: "Student Discount Available"
+    },
+    {
+      id: "13",
+      img: "images/13.webp",
+      title: "Acer Swift Go 14 AI Copilot+ PC | 14.5\"",
+      description: "Acer Swift Go 14 AI Copilot+ PC | 14.5\" 2.5K 120Hz Display | Unlock AI Experiences | Snapdragon X Plus 8-Core Processor | 16GB RAM | 1TB Gen 4 SSD | Wi-Fi 7 | Windows 11 Home | SFG14-01-X006",
+      price: "P12999",
+      discountText: "Student Discount Available"
+    },
+    {
+      id: "15",
+      img: "images/15.webp",
+      title: "Acer Swift Go 14 Intel Evo Edition Laptop",
+      description: "Acer Swift Go 14 Intel Evo Edition Laptop | 14\" OLED WQXGA+ 2880x1800 Display | Unlock AI Experiences | Intel Core Ultra 5 processor 125H | Intel ARC | 8GB LPDDR5 | 512GB SSD | WiFi 6E | SFG14-73-58EP",
+      price: "P11699",
+      discountText: "Student Discount Available"
+    },
+    {
+      id: "18",
+      img: "images/18.webp",
+      title: "KVIDIO Bluetooth Headphones Over Ear",
+      description: "KVIDIO Bluetooth Headphones Over Ear, 65 Hours Playtime Wireless Headphones with Microphone, Foldable Lightweight Headset with Deep Bass, HiFi Stereo Sound for Travel Work Cellphone",
+      price: "P699",
+      discountText: "Student Discount Available"
+    },
+    {
+      id: "19",
+      img: "images/19.webp",
+      title: "SanDisk 1TB Extreme PRO Portable SSD",
+      description: "SanDisk 1TB Extreme PRO Portable SSD - Up to 2000MB/s - USB-C, USB 3.2 Gen 2x2, IP65 Water and Dust Resistance, Updated Firmware - External Solid State Drive - SDSSDE81-4T00-G25",
+      price: "P1200",
+      discountText: "Student Discount Available"
+    },
+    {
+      id: "20",
+      img: "images/20.webp",
+      title: "USB-C Type C to USB-C Type Charge",
+      description: "USB-C Type C to USB-C Type Charge & Data Cable Cord Wire for New Beats Flex, Samsung, LG, Pixel, iPhone 15 & Other New Rechargeable Headsets, Earphones, Earbuds Portable SSD & Android Phones/Tablets",
+      price: "P190",
+      discountText: "Student Discount Available"
+    },
+    {
+      id: "24",
+      img: "images/24.webp",
+      title: "Wireless Earbuds",
+      description: "Wireless Earbuds, Bluetooth Headphones 5.4 HiFi Stereo, in Ear Earphones with 4 ENC Noise Cancelling Mics, 40H Playtime Ear Buds with Mini Case, IP7 Waterproof Headset with LED Display, USB C Charging phones",
+      price: "P400",
+      discountText: "Student Discount Available"
+    },
+    {
+      id: "26",
+      img: "images/26.webp",
+      title: "Apple iPhone 12 Pro Max",
+      description: "Apple iPhone 12 Pro Max (256GB, Pacific Blue)",
+      price: "P8600",
+      discountText: "Student Discount Available"
+    },
+    {
+      id: "29",
+      img: "images/29.webp",
+      title: "Xiaomi 14T Ai 5G",
+      description: "Xiaomi 14T Ai 5G (512/12GB) Global ROM Unlocked Worldwide (for Tmobile Mint Tello Global) 50MP Triple Pro Leica Camera 6.67\" 144Mhz (Titan Black)",
+      price: "P2459",
+      discountText: "Student Discount Available"
+    },
+    {
+      id: "30",
+      img: "images/30.webp",
+      title: "Samsung Galaxy A16 4G LTE",
+      description: "Samsung Galaxy A16 4G LTE (128GB + 4GB) International Model SM-A165F/DS Factory Unlocked, 6.7\", Dual SIM, 50MP Triple Camera (Case Bundle), Black",
+      price: "P2599",
+      discountText: "Student Discount Available"
+    }
+  ];
 
-    const params = new URLSearchParams(window.location.search);
-    const productId = params.get("id");
+  // Function to get URL parameter
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
 
-    const product = products[productId];
-    const container = document.getElementById("product-detail");
-
-    if (product) {
-      container.innerHTML = `
-        <div class="product-card">
-          <img src="${product.image}" alt="${product.title}">
-          <h2>${product.title}</h2>
-          <p>${product.description}</p>
-          <p><strong>${product.price}</strong></p>
-          <button onclick="addToCart('${productId}')" class="btn">Add to Cart</button>
-        </div>
-      `;
-    } else {
-      container.innerHTML = "<p>Product not found.</p>";
+  // Function to display product details
+  function displayProduct(product) {
+    if (!product) {
+      document.getElementById('product-container').innerHTML = "<p>Product not found.</p>";
+      return;
     }
 
-    function addToCart(id) {
-      const cart = JSON.parse(localStorage.getItem("cart")) || [];
-      cart.push(products[id]);
-      localStorage.setItem("cart", JSON.stringify(cart));
-      alert("Added to cart!");
-    }
-  </script>
+    const html = `
+      <div class="product-info" id="product-${product.id}">
+        <img src="${product.img}" alt="${product.id}" />
+        <h2>${product.title}</h2>
+        <p>${product.description}</p>
+        <p><strong>${product.price}</strong></p>
+        <p><span style="color:green;">${product.discountText}</span></p>
+        <button class="btn">Add to Cart</button>
+      </div>
+    `;
+    document.getElementById('product-container').innerHTML = html;
+  }
+
+  // Main execution
+  window.addEventListener('DOMContentLoaded', () => {
+    const productId = getQueryParam('id');
+    const product = products.find(p => p.id === productId);
+    displayProduct(product);
+  });
+</script>
 </body>
 </html>
