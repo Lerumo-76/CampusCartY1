@@ -200,6 +200,25 @@
     const product = products.find(p => p.id === productId);
     displayProduct(product);
   });
+  // Function to display product details
+function displayProduct(product) {
+  if (!product) {
+    document.getElementById('product-container').innerHTML = "<p>Product not found.</p>";
+    return;
+  }
+
+  const html = `
+    <div class="product-info" id="product-${product.id}">
+      <img src="${product.img}" alt="${product.id}" />
+      <h2>${product.title}</h2>
+      <p>${product.description}</p>
+      <p><strong>${product.price}</strong></p>
+      <p><span style="color:green;">${product.discountText}</span></p>
+      <button class="btn">Add to Cart</button>
+    </div>
+  `;
+  document.getElementById('product-container').innerHTML = html;
+}
 </script>
 </body>
 </html>
