@@ -1,0 +1,54 @@
+<!-- cart.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Cart</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <header>
+    <h1>CampusCart - Cart</h1>
+  </header>
+
+  <main id="cart-container" style="padding: 2rem;">
+    <!-- Cart items will be injected here -->
+  </main>
+
+  <footer><p>&copy; 2025 CampusCart</p></footer>
+
+  <script>
+    function loadCart() {
+      const cartContainer = document.getElementById('cart-container');
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+      if (cart.length === 0) {
+        cartContainer.innerHTML = "<p>No items in cart.</p>";
+        return;
+      }
+
+      let html = '<h2>Your Cart</h2>';
+      html += '<ul style="list-style:none; padding: 0;">';
+
+      cart.forEach(item => {
+        html += `
+          <li style="margin-bottom: 1rem; border-bottom: 1px solid #ccc; padding-bottom: 1rem;">
+            <img src="${item.img}" alt="${item.title}" style="width: 100px; height: auto;" />
+            <h3>${item.title}</h3>
+            <p>${item.description}</p>
+            <p><strong>${item.price}</strong></p>
+            <p>Quantity: ${item.quantity}</p>
+          </li>
+        `;
+      });
+
+      html += '</ul>';
+      cartContainer.innerHTML = html;
+    }
+
+    window.addEventListener('DOMContentLoaded', loadCart);
+  </script>
+</body>
+</html>
