@@ -89,6 +89,67 @@
     }
 
     window.addEventListener('DOMContentLoaded', loadCart);
+    const currentPage = window.location.pathname;
+
+  // Clear all active states
+  document.querySelectorAll('.side-nav a').forEach(link => {
+    link.classList.remove('active');
+  });
+
+  // Apply active state based on current page
+  if (currentPage.includes('shop.html')) {
+    document.querySelector('a[href="shop.html"]')?.classList.add('active');
+  } else if (currentPage.includes('products.html')) {
+    document.querySelector('a[href="products.html"]')?.classList.add('active');
+  } else if (currentPage.includes('deals.html')) {
+    document.querySelector('a[href="deals.html"]')?.classList.add('active');
+  }
+    function loadCart() {
+    const cartContainer = document.getElementById('cart-container');
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    if (cart.length === 0) {
+      cartContainer.innerHTML = "<p>No items in cart.</p>";
+      return;
+    }
+
+    let html = '<h2>Your Cart</h2><ul style="list-style:none; padding: 0;">';
+
+    cart.forEach((item, index) => {
+      html += `
+        <li style="margin-bottom: 1rem; border-bottom: 1px solid #ccc; padding-bottom: 1rem;">
+          <img src="${item.img}" alt="${item.title}" style="width: 100px; height: auto;" />
+          <h3>${item.title}</h3>
+          <p>${item.description}</p>
+          <p><strong>${item.price}</strong></p>
+          <p>Quantity: ${item.quantity}</p>
+          <button onclick="updateQuantity(${index}, -1)">−</button>
+          <button onclick="updateQuantity(${index}, 1)">+</button>
+          <button onclick="removeFromCart(${index})">Remove</button>
+        </li>
+      `;
+    });
+
+    html += '</ul>';
+    cartContainer.innerHTML = html;
+  }
+
+  function updateQuantity(index, change) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart[index].quantity += change;
+    if (cart[index].quantity < 1) cart[index].quantity = 1;
+    localStorage.setItem('cart', JSON.stringify(cart));
+    loadCart();
+  }
+
+  function removeFromCart(index) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    loadCart();
+  }
+
+  window.addEventListener('DOMContentLoaded', loadCart);
   </script>
 </body>
 </html>
